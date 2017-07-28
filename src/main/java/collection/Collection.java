@@ -15,7 +15,7 @@ public interface Collection<T> extends Iterable<T> {
 
     Object[] toArray();
 
-    T[] toArray(T[] array);
+    T[] toArray(T[] targetArray);
 
     boolean add(T object);
 

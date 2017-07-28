@@ -1,6 +1,7 @@
 package collection;
 
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
@@ -43,6 +44,33 @@ public abstract class AbstractCollection<T> implements Collection<T>{
             }
         }
         return iterator.hasNext() ? finishToArray((T[]) array, iterator) : array;
+    }
+
+    public T[] toArray(T[] targetArray) {
+        int targetLength = targetArray.length;
+        int size = size();
+        T[] array = targetLength >= size ? targetArray : (T[]) Array.newInstance(targetArray.getClass().getComponentType(),size);
+        Iterator<T> iterator = iterator();
+
+        for (int i = 0; i < size; i++) {
+            if(!iterator.hasNext()) {
+                if(array == targetArray) {
+                    //TODO 没理解后续内容
+                    array[i] = null;
+                } else if(targetLength < i) {
+                    return Arrays.copyOf(array,i);
+                } else {
+                    System.arraycopy(array,0,targetArray,0,i);
+                    if(targetLength > i) {
+                        array[i] = null;
+                    }
+                }
+                return targetArray;
+            } else {
+                array[i] = iterator.next();
+            }
+        }
+        return null;
     }
 
 
