@@ -74,6 +74,21 @@ public abstract class AbstractCollection<T> implements Collection<T>{
     }
 
 
+    public boolean remove(T object) {
+        if(object == null) {
+            return false;
+        } else {
+            Iterator<T> iterator = iterator();
+            while (iterator.hasNext()) {
+                if(object.equals(iterator.next())) {
+                    iterator.remove();
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
     private static <T> T[] finishToArray(T[] array, Iterator<T> iterator) {
         int length = array.length;
 
