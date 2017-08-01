@@ -20,10 +20,15 @@ public abstract class AbstractCollection<T> implements Collection<T>{
     }
 
     public boolean contain(T object) {
+        Iterator<T> iterator = iterator();
         if(object == null) {
+            while (iterator.hasNext()) {
+                if(iterator.next() == null) {
+                    return true;
+                }
+            }
             return false;
         } else {
-            Iterator<T> iterator = iterator();
             while (iterator.hasNext()) {
                 if(object.equals(iterator.next())) {
                     return true;
@@ -73,6 +78,21 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         return null;
     }
 
+    public boolean add(T object) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean addAll(Collection<? extends T> collection) {
+        boolean result = false;
+        //todo 后面实现foreach
+        Iterator<? extends T> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            if(add(iterator.next())) {
+                result = true;
+            }
+        }
+        return result;
+    }
 
     public boolean remove(T object) {
         if(object == null) {

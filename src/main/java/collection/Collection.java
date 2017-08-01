@@ -19,7 +19,7 @@ public interface Collection<T> extends Iterable<T> {
 
     boolean add(T object);
 
-    boolean addAll(Collection<T> collection);
+    boolean addAll(Collection<? extends T> collection);
 
     boolean remove(T object);
 
