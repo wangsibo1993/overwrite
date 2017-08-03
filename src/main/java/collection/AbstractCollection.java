@@ -38,6 +38,17 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         }
     }
 
+    public boolean containAll(Collection<T> collection) {
+        boolean result = true;
+        Iterator<T> iterator = collection.iterator();
+        while (iterator.hasNext() && result == true) {
+            if(!contain(iterator.next())) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
     public Object[] toArray() {
         Object[] array = new Object[size()];
         Iterator<T> iterator = iterator();
@@ -83,15 +94,15 @@ public abstract class AbstractCollection<T> implements Collection<T>{
     }
 
     public boolean addAll(Collection<? extends T> collection) {
-        boolean result = false;
+        boolean modified = false;
         //todo 后面实现foreach
         Iterator<? extends T> iterator = collection.iterator();
         while (iterator.hasNext()) {
             if(add(iterator.next())) {
-                result = true;
+                modified = true;
             }
         }
-        return result;
+        return modified;
     }
 
     public boolean remove(T object) {
@@ -107,6 +118,17 @@ public abstract class AbstractCollection<T> implements Collection<T>{
             }
             return false;
         }
+    }
+
+    public boolean removeAll(Collection<T> collection) {
+        boolean modified = false;
+        Iterator<T> iterator = collection.iterator();
+        while (iterator.hasNext()) {
+            if(remove(iterator.next())) {
+                modified = true;
+            }
+        }
+        return modified;
     }
 
     private static <T> T[] finishToArray(T[] array, Iterator<T> iterator) {
