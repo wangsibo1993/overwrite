@@ -131,6 +131,18 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         return modified;
     }
 
+    public boolean retainAll(Collection<T> collection) {
+        boolean modified = false;
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            if(!collection.contain(iterator.next())){
+                iterator.remove();
+                modified = true;
+            }
+        }
+        return modified;
+    }
+
     private static <T> T[] finishToArray(T[] array, Iterator<T> iterator) {
         int length = array.length;
 
