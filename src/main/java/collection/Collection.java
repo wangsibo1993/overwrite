@@ -27,5 +27,5 @@ public interface Collection<T> extends Iterable<T> {
 
     boolean retainAll(Collection<T> collection);
 
-    boolean clear();
+    void clear();
 }

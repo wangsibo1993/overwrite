@@ -143,6 +143,14 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         return modified;
     }
 
+    public void clear() {
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            iterator.next();
+            iterator.remove();
+        }
+    }
+
     private static <T> T[] finishToArray(T[] array, Iterator<T> iterator) {
         int length = array.length;
 
