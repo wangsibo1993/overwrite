@@ -9,5 +9,5 @@ public interface Iterator<T> {
 
     T next();
 
-    boolean remove();
+    void remove();
 }
