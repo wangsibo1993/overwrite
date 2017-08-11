@@ -1,16 +1,74 @@
 package collection.map;
 
-import java.util.Set;
+
+import collection.Collection;
+import collection.Iterator;
+import collection.set.Set;
 
 /**
  * Created by sibo.wang on 17/7/26.
  */
 public abstract class AbstractMap<K,V> implements Map<K,V>{
 
-    public abstract Set<Entry<K,V>> entrySet();
+    protected AbstractMap () {
 
+    }
+
+    public abstract Set<Entry<K,V>> entrySet();
 
     public int size() {
         return entrySet().size();
     }
+
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    public boolean containsKey(K key) {
+        Iterator<Entry<K,V>> iterator = entrySet().iterator();
+        while (iterator.hasNext()) {
+            Entry<K,V> entry = iterator.next();
+            if(key == null) {
+                if(entry.getKey() == null) {
+                    return true;
+                }
+            } else {
+                if(key.equals(entry.getKey())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean containsValue(V value) {
+        Iterator<Entry<K,V>> iterator = entrySet().iterator();
+        while (iterator.hasNext()) {
+            Entry<K,V> entry = iterator.next();
+            if(value == null) {
+                if(entry.getValue() == null) {
+                    return true;
+                }
+            } else {
+                if(value.equals(entry.getValue())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public V put(K key,V value) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void putAll(Map<? extends K,? extends V> map) {
+        Iterator<? extends Entry<? extends K, ? extends V>> iterator = map.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Entry<? extends K,? extends V> entry = iterator.next();
+            put(entry.getKey(),entry.getValue());
+        }
+    }
+
+
 }

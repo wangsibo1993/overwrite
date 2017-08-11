@@ -15,9 +15,9 @@ public interface Map<K,V> {
 
     V getValue();
 
-    V pull(K key,V value);
+    V put(K key,V value);
 
-    void pullAll(Map<? extends K,? extends V> map);
+    void putAll(Map<? extends K,? extends V> map);
 
     boolean containsKey(K key);
 
