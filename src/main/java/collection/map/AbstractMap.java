@@ -1,7 +1,6 @@
 package collection.map;
 
 
-import collection.Collection;
 import collection.Iterator;
 import collection.set.Set;
 
@@ -70,5 +69,50 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
         }
     }
 
+    public V get(K key) {
+        Iterator<Entry<K,V>> iterator = entrySet().iterator();
+        if(key == null) {
+            while (iterator.hasNext()) {
+                Entry<K,V> entry = iterator.next();
+                K entryKey = entry.getKey();
+                if(entryKey == null) {
+                    return entry.getValue();
+                }
+            }
+        } else {
+            while (iterator.hasNext()) {
+                Entry<K,V> entry = iterator.next();
+                K entryKey = entry.getKey();
+                if(key.equals(entryKey)) {
+                    return entry.getValue();
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean equals(Object object) {
+        if(!(object instanceof Map)) {
+            return false;
+        } else {
+            Map<K,V> map = (Map)object;
+            Iterator<Entry<K,V>> iterator = entrySet().iterator();
+            while (iterator.hasNext()) {
+                Entry<K,V> entry = iterator.next();
+                K key = entry.getKey();
+                V value = entry.getValue();
+                if(!map.containsKey(key)) {
+                    return false;
+                } else {
+                    if(!value.equals(map.get(key))) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+            return true;
+        }
+    }
 
 }

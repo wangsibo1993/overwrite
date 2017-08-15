@@ -15,6 +15,8 @@ public interface Map<K,V> {
 
     V getValue();
 
+    V get(K key);
+
     V put(K key,V value);
 
     void putAll(Map<? extends K,? extends V> map);
