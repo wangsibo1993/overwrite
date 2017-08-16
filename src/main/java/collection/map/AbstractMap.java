@@ -4,6 +4,8 @@ package collection.map;
 import collection.Iterator;
 import collection.set.Set;
 
+import java.io.Serializable;
+
 /**
  * Created by sibo.wang on 17/7/26.
  */
@@ -112,6 +114,71 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
                 }
             }
             return true;
+        }
+    }
+
+    public class SimplyEntry<K,V> implements Entry<K,V>,Serializable{
+
+        private static final long serialVersionUID = 7868506522601365820L;
+
+        private final K key;
+
+        private V value;
+
+        public SimplyEntry(K key,V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public SimplyEntry(Entry<? extends K,? extends V> entry) {
+            this.key = entry.getKey();
+            this.value = entry.getValue();
+        }
+
+        @Override
+        public K getKey() {
+            return this.key;
+        }
+
+        @Override
+        public V getValue() {
+            return this.value;
+        }
+
+        /**
+         * @param value
+         * @return oldValue
+         */
+        @Override
+        public V setValue(V value) {
+            V oldValue = this.value;
+            this.value = value;
+            return oldValue;
+        }
+
+        public boolean equals(Object object) {
+            if(!(object instanceof Entry)) {
+                return false;
+            } else {
+                Entry<K,V> entry = (Entry<K,V>) object;
+                return eq(entry.getKey(),this.key) && eq(entry.getValue(),this.value);
+            }
+        }
+
+        public int hashCode() {
+            return (key == null ? 0 : key.hashCode()) ^ (value == null ? 0 : value.hashCode());
+        }
+
+        public String toString() {
+            return key + "=" +value;
+        }
+
+        private boolean eq(Object object1,Object object2) {
+            if(object1 == null) {
+                return object2 == null;
+            } else {
+                return object1.equals(object2);
+            }
         }
     }
 
