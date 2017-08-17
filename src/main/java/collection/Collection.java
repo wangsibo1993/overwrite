@@ -23,7 +23,7 @@ public interface Collection<T> extends Iterable<T> {
 
     boolean remove(T object);
 
-    boolean removeAll(Collection<?> collection);
+    boolean removeAll(Collection<T> collection);
 
     boolean retainAll(Collection<T> collection);
 

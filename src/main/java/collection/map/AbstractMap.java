@@ -173,12 +173,64 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
             return key + "=" +value;
         }
 
-        private boolean eq(Object object1,Object object2) {
-            if(object1 == null) {
-                return object2 == null;
+    }
+
+    public class SimplyImmutableEntry<K,V> implements Entry<K,V> , Serializable{
+
+        private static final long serialVersionUID = 6242472238239092643L;
+
+        private K key;
+
+        private V value;
+
+        public SimplyImmutableEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public SimplyImmutableEntry(Entry<? extends K,? extends V> entry) {
+            this.key = entry.getKey();
+            this.value = entry.getValue();
+        }
+
+        @Override
+        public K getKey() {
+            return key;
+        }
+
+        @Override
+        public V getValue() {
+            return value;
+        }
+
+        @Override
+        public V setValue(V value) {
+            throw new UnsupportedOperationException();
+        }
+
+        public boolean equals(Object object) {
+            if(!(object instanceof Map)) {
+                return false;
             } else {
-                return object1.equals(object2);
+                Entry<K,V> entry = (Entry<K,V>)object;
+                return (eq(key,entry.getKey()) && eq(value,entry.getValue()));
             }
+        }
+
+        public int hashCode() {
+            return (key == null ? 0 : key.hashCode()) ^ (value == null ? 0 : value.hashCode());
+        }
+
+        public String toString() {
+            return key + "=" + value;
+        }
+    }
+
+    private boolean eq(Object object1,Object object2) {
+        if(object1 == null) {
+            return object2 == null;
+        } else {
+            return object1.equals(object2);
         }
     }
 
