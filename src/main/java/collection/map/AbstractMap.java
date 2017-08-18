@@ -93,6 +93,29 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
         return null;
     }
 
+    public V remove(K key) {
+        V oldValue;
+        Iterator<Entry<K,V>> iterator = entrySet().iterator();
+        while (iterator.hasNext()) {
+            Entry<K,V> entry = iterator.next();
+            K currentKey = entry.getKey();
+            if(key == null) {
+                if(currentKey == null) {
+                    oldValue = entry.getValue();
+                    iterator.remove();
+                    return oldValue;
+                }
+            } else {
+                if(key.equals(currentKey)) {
+                    oldValue = entry.getValue();
+                    iterator.remove();
+                    return oldValue;
+                }
+            }
+        }
+        return null;
+    }
+
     public boolean equals(Object object) {
         if(!(object instanceof Map)) {
             return false;
