@@ -140,6 +140,15 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
         }
     }
 
+    public int hashCode() {
+        int hashCode = 0;
+        Iterator<Entry<K,V>> iterator = entrySet().iterator();
+        while (iterator.hasNext()) {
+            hashCode += iterator.next().hashCode();
+        }
+        return hashCode;
+    }
+
     public class SimplyEntry<K,V> implements Entry<K,V>,Serializable{
 
         private static final long serialVersionUID = 7868506522601365820L;
