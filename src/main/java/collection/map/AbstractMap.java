@@ -1,6 +1,7 @@
 package collection.map;
 
 
+import collection.Collection;
 import collection.Iterator;
 import collection.set.Set;
 
@@ -14,6 +15,10 @@ public abstract class AbstractMap<K,V> implements Map<K,V>{
     protected AbstractMap () {
 
     }
+
+    transient volatile Set<K> keySet = null;
+
+    transient volatile Collection<V> values = null;
 
     public abstract Set<Entry<K,V>> entrySet();
 
