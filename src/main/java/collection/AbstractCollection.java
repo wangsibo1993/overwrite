@@ -15,11 +15,15 @@ public abstract class AbstractCollection<T> implements Collection<T>{
 
     }
 
+    public abstract Iterator<T> iterator();
+
+    public abstract int size();
+
     public boolean isEmpty() {
         return 0 == size();
     }
 
-    public boolean contain(T object) {
+    public boolean contains(T object) {
         Iterator<T> iterator = iterator();
         if(object == null) {
             while (iterator.hasNext()) {
@@ -38,11 +42,11 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         }
     }
 
-    public boolean containAll(Collection<T> collection) {
+    public boolean containsAll(Collection<T> collection) {
         boolean result = true;
         Iterator<T> iterator = collection.iterator();
         while (iterator.hasNext() && result == true) {
-            if(!contain(iterator.next())) {
+            if(!contains(iterator.next())) {
                 result = false;
             }
         }
@@ -135,7 +139,7 @@ public abstract class AbstractCollection<T> implements Collection<T>{
         boolean modified = false;
         Iterator<T> iterator = iterator();
         while (iterator.hasNext()) {
-            if(!collection.contain(iterator.next())){
+            if(!collection.contains(iterator.next())){
                 iterator.remove();
                 modified = true;
             }

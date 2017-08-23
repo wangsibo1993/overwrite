@@ -27,7 +27,7 @@ public interface Set<T> extends Collection<T> {
 
     boolean remove(T object);
 
-    boolean removeAll(Collection<?> collection);
+    boolean removeAll(Collection<T> collection);
 
     boolean equals(Object object);
 

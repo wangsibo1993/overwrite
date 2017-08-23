@@ -9,9 +9,9 @@ public interface Collection<T> extends Iterable<T> {
 
     boolean isEmpty();
 
-    boolean contain(T object);
+    boolean contains(T object);
 
-    boolean containAll(Collection<T> collection);
+    boolean containsAll(Collection<T> collection);
 
     Object[] toArray();
 
