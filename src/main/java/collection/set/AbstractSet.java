@@ -1,6 +1,7 @@
 package collection.set;
 
 import collection.AbstractCollection;
+import collection.Iterator;
 
 /**
  * Created by sibo.wang on 2017/8/23.
@@ -32,5 +33,15 @@ public abstract class AbstractSet<T> extends AbstractCollection<T> implements Se
                 }
             }
         }
+    }
+
+    public int hashCode() {
+        int hashCode = 0;
+        Iterator<T> iterator = iterator();
+        while (iterator.hasNext()) {
+            T object = iterator.next();
+            hashCode += object.hashCode();
+        }
+        return hashCode;
     }
 }
