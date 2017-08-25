@@ -1,6 +1,7 @@
 package collection.set;
 
 import collection.AbstractCollection;
+import collection.Collection;
 import collection.Iterator;
 
 /**
@@ -43,5 +44,24 @@ public abstract class AbstractSet<T> extends AbstractCollection<T> implements Se
             hashCode += object.hashCode();
         }
         return hashCode;
+    }
+
+    public boolean removeAll(Collection<T> collection) {
+        boolean isModify = false;
+        if(size() > collection.size()) {
+            Iterator<T> paramIterator = collection.iterator();
+            while (paramIterator.hasNext()) {
+                isModify |= remove(paramIterator.next());
+            }
+        } else {
+            Iterator<T> iterator = iterator();
+            while (iterator.hasNext()) {
+                if(collection.contains(iterator.next())) {
+                    iterator.remove();
+                    isModify = true;
+                }
+            }
+        }
+        return isModify;
     }
 }

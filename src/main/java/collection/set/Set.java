@@ -15,9 +15,9 @@ public interface Set<T> extends Collection<T> {
 
     Iterator<T> iterator();
 
-    boolean contain(T object);
+    boolean contains(T object);
 
-    boolean containAll(Collection<T> collection);
+    boolean containsAll(Collection<T> collection);
 
     boolean retainAll(Collection<T> collection);
 
